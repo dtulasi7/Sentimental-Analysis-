@@ -7,10 +7,20 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.model_selection import train_test_split
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/nb-lr-comparision-for-amazon-reviews")
 def navie_bayes_and_logistic_regression_model_comparision():
